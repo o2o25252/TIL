@@ -1,5 +1,5 @@
 # Today I Learned (TIL)
-========================
+
 >🔥  :  Today I learned 
 >>📗[ : Blog](https://velog.io/@pen9508901)
 
@@ -7,5 +7,7 @@
 
 ## Basic CS Sections
 * Immersive Prep
-  * test
+  * Datastructure & OOP
+   * Inheritance
+    * Algorithms
      
