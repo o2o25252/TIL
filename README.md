@@ -1,10 +1,11 @@
 # Today I Learned (TIL)
 ========================
 >🔥  :  Today I learned 
->>오늘의 꺠달음(?)과 알게된 지식 을 정리한곳
+[![Blog](https://img.shields.io/badge/https://velog.io/@pen9508901)](https://velog.io/@pen9508901)
 
 <hr/>
 
-### Basic CS
-[Basic CS](https://github.com/o2o25252/TIL/tree/master/BasicCS)
+## Basic CS Sections
+* Immersive Prep
+  *test
 
