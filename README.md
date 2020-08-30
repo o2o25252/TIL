@@ -7,7 +7,4 @@
 
 ## Basic CS Sections
 * Immersive Prep
-  *test
-  * IoC	* IoC
-  * 
-
+   *test
