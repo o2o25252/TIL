@@ -6,8 +6,5 @@
 <hr/>
 
 ## Basic CS Sections
- * Immersive Prep
-  * Datastructure & OOP
-   * Inheritance
-   * Algorithms
+
      
