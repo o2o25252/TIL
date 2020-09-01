@@ -1,7 +1,7 @@
 
 # JavaScript
 
-<img src="/path/to/img.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="https://user-images.githubusercontent.com/61407010/91863660-4f76c280-ecaa-11ea-8668-cee239d24b93.jpgg"></img><br/>
+<img src="/path/to/img.jpg" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="https://user-images.githubusercontent.com/61407010/91863660-4f76c280-ecaa-11ea-8668-cee239d24b93.jpg"></img><br/>
 ## 화살표 함수 (arrow function)
 
 보통 함수 표현식을 축약한 형태로 표시됩니다.
