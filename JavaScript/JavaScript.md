@@ -1,6 +1,5 @@
 
 # JavaScript
-<hr>
 
 ## 화살표 함수 (arrow function)
 
