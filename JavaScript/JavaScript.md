@@ -1,6 +1,6 @@
 
 # JavaScript
-![Alt Text] (/Desktop/❤️/images.jps)
+![Alt Text] /Desktop/❤️/images.jpg
 ## 화살표 함수 (arrow function)
 
 보통 함수 표현식을 축약한 형태로 표시됩니다.
