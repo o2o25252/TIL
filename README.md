@@ -8,6 +8,6 @@
 ## Basic CS Sections
 
 ## JavaScript
->    [Javascript] : ("https://github.com/o2o25252/TIL/blob/master/JavaScript/JavaScript.md")
-적용예: [Google](https://google.com, "google link")
+>    [Javascript](https://github.com/o2o25252/TIL/blob/master/JavaScript/JavaScript.md,"https://github.com/o2o25252/TIL/blob/master/JavaScript/JavaScript.md")
+
      
