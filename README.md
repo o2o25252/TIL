@@ -8,5 +8,5 @@
 ## Basic CS Sections
 
 ## JavaScript
->    [Javascript] : "https://github.com/o2o25252/TIL/blob/master/JavaScript/JavaScript.md"
+>    [Javascript] : ("https://github.com/o2o25252/TIL/blob/master/JavaScript/JavaScript.md")
      
