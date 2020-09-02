@@ -8,5 +8,5 @@
 ## Basic CS Sections
 
 
-## Javascript
+## [Javascript] : "https://github.com/o2o25252/TIL/blob/master/JavaScript/JavaScript.md"
      
