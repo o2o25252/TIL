@@ -148,6 +148,32 @@ function defer(f, ms) {
 }
 //일반 함수에선 setTimeout에 넘겨주는 콜백 함수에서 사용할 변수 ctx와 //args를 반드시 만들어줘야 합니다.
 ```
+#### 예제
+등장 하는 단어의 갯수를 값으로 가진 객체를 리턴 하라
+```
+let word = 'I felt happy because I saw the others were happy and because I knew I should feel happy but I was not really happy'
+
+function ex1(str) {
+
+
+  let a =str.split(' ');//쪼개기 [abc,'',a,'',b,obj]
+ 
+  let word = a.filter( w => w !=='');
+    
+  return word.reduce((a,c) => {
+       if( c in a){
+            console.log(c);
+           a[c]++
+            
+        }else{            
+            a[c] = 1;
+            //console.log(a[c]);
+        }return a;
+    
+  },{})
+}
+ex(word); // {I: 5, felt: 1, happy: 4, because: 2, saw: 1, …}
+```
      
 <hr>
 
