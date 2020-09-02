@@ -172,7 +172,7 @@ function ex1(str) {
     
   },{})
 }
-ex(word); // {I: 5, felt: 1, happy: 4, because: 2, saw: 1, …}
+ex1(word); // {I: 5, felt: 1, happy: 4, because: 2, saw: 1, …}
 ```
      
 <hr>
