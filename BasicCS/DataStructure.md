@@ -10,6 +10,9 @@
 
 <hr>
 
+*자료구조* 는 데이터들의 모임 , 관계,  함수 , 명령 등의 집합을 의미한다.
+
+
 ## 스택
 특징!
         LIFO 
@@ -148,5 +151,242 @@ this.front = Number(Object.keys(this.storage)[0]);
 // 리턴
 return save;
 ```
+## 해쉬 테이블 
+[참고](https://evan-moon.github.io/2019/06/25/hashtable-with-js/)
+ *해시 테이블*은 어떤 특정 값을 받으면 그 값을 해시 함수에 통과시켜 나온 `index`에 저장하는  자료 구조이다.
+
+직접 주소 테이터 (Direct Address Table ) 에서 시작 되었다. 
+*단점* 을 해시 함수로 보완 하면서 등장?
+
+`해시 함수` 를 통해 변환 되어 나온 인덱스 값 을 통하면 만든다. === `해싱`
+그런데 이렇게 `해싱` 되어 나온 `Index` 의 값이 두개 이상이 되었을떄 즉, 같은 값 이 나올떄
+*해시의 충동 (Collision)*이 발생한다.
+##### 충돌 해결
+
+        1.선형 탐사법 (Linear Probing)
+        선형으로 순차적으로 탐사하는 방법 충돌 발생시 정해진 n칸만큼의 옆 방을 주는 방법
+        n = 1 이라면 2번 인덱스를,  n = 3 이라면 4번 인덱스에 저장
+        2.제곱 탐사법 (Quadratic Probing)
+        탐사하는 폭이 고정폭 아닌 제곱으로 늘어난다
+        충돌 지점으로 부터 1(제곱)만큼 , 두번째 충돌이 발생시 2의 제곱, 세번째는 3의 제곱 이런식
+        으로 커진다.
+        3.이중 해싱(Double Hashing)
+        해시 함수를 이중으로 사용하는 방법 
+        최초 해시를 얻을 떄 사용후 , 충돌이 났을 경우 탐사 이동폭을 얻기 위해 사용한다. 
+        최초 해시로 같은 값이 나오더라도 다시 다른 해시 함수를 거치면서 다른 탐사 이동폭이
+        나올 확률이 높기 떄문에 매번 다른 공간에 값이골고루 저장될 확률도 높아진다.
+        ```
+            const myTableSize = 23; // 테이블 사이즈가 소수여야 효과가 좋다
+            const myHashTable = [];
+
+            const getSaveHash = value => value % myTableSize;
+
+            // 스텝 해시에 사용되는 수는 테이블 사이즈보다 약간 작은 소수를 사용한다.
+            const getStepHash = value => 17 - (value % 17);
+
+            const setValue = value => {
+              let index = getSaveHash(value);
+              let targetValue = myHashTable[index];
+              while (true) {
+                if (!targetValue) {
+                  myHashTable[index] = value;
+                  console.log(`${index}번 인덱스에 ${value} 저장! `);
+                  return;
+                }
+                else if (myHashTable.length >= myTableSize) {
+                  console.log('풀방입니다');
+                  return;
+                }
+                else {
+                  console.log(`${index}번 인덱스에 ${value} 저장하려다 충돌 발생!ㅜㅜ`);
+                  index += getStepHash(value);
+                  index = index > myTableSize ? index - myTableSize : index;
+                  targetValue = myHashTable[index];
+                }
+              }
+            }
+
+        ```
+        5.분리 연결법 (Separate Chaining)
+        해쉬 테이블의 버킷에 하나의 값이 아니라 `Linked List` 나 `Tree`를 사용 
+        
+         `Linked List` 일떄 모습
+         [0][1][2][3]
+         [0] 의 안의 값은 [1]{key:value,next node 2}[2]{key:value,next node 3}[3]{key:value,next node null}
+
+
+#### 테이블 크기 재할당(Resizing)
+
+정적인 공간을 할당해서 많은 데이터를 담기 위한 자료구조인 만큼 언젠가 데이터가 넘치기 마련
+
+분리 연결법을 사용하는 경우에는 테이블에 빈 공간이 적어지면서 충돌이 발생할 수록 각각의 버킷에 저장된 리스트가 점점 더 길어져서 리스트를 탐색하는 리소스가 너무 늘어난 상황이 발생
+
+어느 정도 비워져 있는 것이 성능 상 더 좋으며, 해시 테이블을 운용할 때는 어느 정도 데이터가 차면 테이블의 크기를 늘려줘야한다
+
+즉, `storage` 의 크기가 8 이라고 해보자 그떄 size 가 75 %가 되거나 높아지면 `리미티드`를 2배로 늘리고
+
+만약 두배가 되어서 16 이되었고 size는  12라고 할떄 이떄 remove되어 size가 `리미티드` 
+의 25% 가 되면 `리미티드` 를 절반으로 줄인다
+
+또한 , 새로운 `storage` 에  기존의 `storage` 에 있던 값들을 해싱 해서 넣어주어야 한다.
+
+*해쉬 함수*
+
+```
+const hashFunction = function(str, max) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i);
+    hash &= hash; // Convert to 32bit integer
+    hash = Math.abs(hash);
+  }
+  return hash % max;
+};
+```
+*정적인 공간*
+```
+const LimitedArray = function(limit) {
+  const storage = [];
+
+  const limitedArray = {};
+  limitedArray.get = function(index) {
+    checkLimit(index);
+    return storage[index];
+  };
+  limitedArray.set = function(index, value) {
+    checkLimit(index);
+    storage[index] = value;
+  };
+  limitedArray.each = function(callback) {
+    for (let i = 0; i < storage.length; i++) {
+      callback(storage[i], i, storage);
+    }
+  };
+
+  var checkLimit = function(index) {
+    if (typeof index !== 'number') {
+      throw new Error('setter requires a numeric index for its first argument');
+    }
+    if (limit <= index) {
+      throw new Error('Error trying to access an over-the-limit index');
+    }
+  };
+
+  return limitedArray;
+};
+```
+*해쉬 테이블*
+
+```
+class HashTable{
+    constructor(){
+        this._size = 0;
+        this._limit = 8;
+        this._storage = LimitedArray(this._limit);
+}
+``` 
+storage 는 Table 이라고 생각 해보자 해쉬 테이블은 `정적` 이다.
+
+
+추가 및 리사이징
+```
+insert(key, value){ // key = 'cat' , value = 'fastly'
+    const index = hashFunction(key, this._limit);
+    //index 는 해쉬 함수로 해싱 되어온 값이다.
+    //값이 1 로 해싱 되어 왔다 
+    let tuple = {} // 인덱스에 들어갈 녀석
     
-    
+    // index에 값이 없는 경우
+    if(!this._storage.get(index)){ // index = 1 
+    tuple[key] = value;  // {cat:'fastly'}
+    }
+    // index에 값이 이미 있는 경우
+    else {
+    tuple = this._storage.get(index) //이미 있는 값을 불러와  tuple에 할당
+    tuple[key] = value // ex) [1]{cat:'fastly',dog:'fastly'}
+    this._storage.set(index, tuple); //갱신
+     }
+     this._size++;
+     
+     //resizing 해야 하는 경우 
+     if((this._size / this._limit * 100 >= 75) { // size가 75를 넘을떄 
+        this._resize(this._limit * 2) // 리미티를 두 배로
+     }
+}
+```
+삭제 및 리사이징
+```
+remove(key) {
+  const index = hashFunction(key, this._limit);
+  // index가 undefined -> return undefined
+  //삭제할 값이 없을떄
+  if (!this._storage.get(index)) {
+    return undefined;
+  }
+  
+  else {//삭제할 값이 있을떄 
+    let tuple = this._storage.get(index); // {cat:'fastly',dog:'fastly'}
+    let save = tuple[key] //key 'cat'이라면 {cat : 'fastly'} 저장 
+    //왜? 리턴용..
+    delete tuple[key] // 하고 남는 값은 {dog:'fastly'}
+    this._storage.set(index, tuple); // 갱신 
+    this._size--;
+    //리사이징 
+    //만약 limit  이 16 까지 늘어난 상태라고 생각 하라 그때 size 는 12
+    //라 가정 이떄 remove로 인하여 값이 4 까지 내려 같다고 생각 하라 
+    if (this._size / this._limit * 100 <= 25 && this._limit > 8) {
+      this._resize(this._limit / 2);
+    } else if (this._limit > 8 && this._size <= 4) {
+      this._resize(this._limit / 2);
+    }
+    return save;
+  }
+}
+```
+찾기
+
+```
+retrieve(key) {
+  const index = hashFunction(key, this._limit);
+  // index에 값이 없는 경우 -> undefined 리턴
+  if (!this._storage.get(index)) {
+    return undefined;
+  }
+  // index에 값이 있는 경우 -> value 리턴
+  else {
+    return this._storage.get(index)[key]; //{cat:'fastly',dog:'fastly'} 
+    // 이중 key cat 인 녀석의 값인 'fastly' 가 리턴 된다. 
+  }
+}
+```
+*리사이징*
+```
+ _resize(newLimit) { // this._limit * 2 
+    let before = this._limit  // 16     // 8
+    this._limit = newLimit;  // 8       // 16
+    // 새로운 스토리지
+    let newStorage = LimitedArray(this._limit);
+    // 기존 스토리지 -> 새로운 스토리지에 넣기
+    for (let i = 0; i < before; i++) { // 기존의 것
+      // tuple의 키를 모두 추출해서
+      for (let key in this._storage.get(i)) {
+        // 키 -> 해시 함수에 넣어서 새로운 인덱스를 추출
+        let index = hashFunction(key, this._limit);
+        let value = this._storage.get(i)[key] 
+        let tuple = {};
+        // 새로운 인덱스를 새로운 스토리지에 넣는다
+        if (!newStorage.get(index)) {
+          tuple[key] = value;
+          newStorage.set(index, tuple);
+        } else {
+          tuple = newStorage.get(index);
+          tuple[key] = value;
+          newStorage.set(index, tuple);
+        }
+      }
+    }
+    this._storage = newStorage;
+  }
+}
+```
+
