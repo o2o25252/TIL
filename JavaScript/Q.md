@@ -35,7 +35,10 @@ class DancerClass {
 
 `DancerClass`에 `this.steop()` , `this.setPosition(top,left)`는 왜 꼭 서야지만 될까? 
 나의 추측은 이렇다 .
-1. step 메서드 에 setTimout 이 있다 이떄 콜백 을 bind 를 하여 현재 this가 callback함수를 고정시키기 위해서 ?
-2. 새롭게 생기는 각 객체마다 다 다른 값을 분간 시키기 위해서 
+~~1. step 메서드 에 setTimout 이 있다 이떄 콜백 을 bind 를 하여 현재 this가 callback함수를 고정시키기 위해서 ?~~
+~~2. 새롭게 생기는 각 객체마다 다 다른 값을 분간 시키기 위해서 ~~
+`constructor` 에 저 메서드 들을 해놓은 이유는 저렇게 해놓지 않으면 실행을 할 수 없어서 였다. ✔️
+
+
 
 
