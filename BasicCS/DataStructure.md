@@ -392,3 +392,8 @@ retrieve(key) {
 }
 ```
 
+#Tree
+
+#Graph
+
+#binary
